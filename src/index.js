@@ -75,18 +75,6 @@ let data1 = [
     ]
   },
   {
-    name: "Canada",
-    values: [
-      { giorno: "2003-01-05", valore: "21" },
-      { giorno: "2004-01-05", valore: "51" },
-      { giorno: "2005-01-05", valore: "190" },
-      { giorno: "2006-01-05", valore: "120" },
-      { giorno: "2007-01-05", valore: "85" },
-      { giorno: "2008-01-05", valore: "221" },
-      { giorno: "2009-01-05", valore: "101" }
-    ]
-  },
-  {
     name: "Maxico",
     values: [
       { giorno: "2000-01-05", valore: "50" },
@@ -100,23 +88,9 @@ let data1 = [
       { giorno: "2008-01-05", valore: "61" },
       { giorno: "2009-01-05", valore: "10" }
     ]
-  },
-  {
-    name: "Italia",
-    values: [
-      { giorno: "2000-01-05", valore: "1" },
-      { giorno: "2001-01-05", valore: "3" },
-      { giorno: "2002-01-05", valore: "5" },
-      { giorno: "2003-01-05", valore: "9" },
-      { giorno: "2004-01-05", valore: "20" },
-      { giorno: "2005-01-05", valore: "60" },
-      { giorno: "2006-01-05", valore: "55" },
-      { giorno: "2007-01-05", valore: "150" },
-      { giorno: "2008-01-05", valore: "179" },
-      { giorno: "2009-01-05", valore: "80" }
-    ]
   }
 ];
+
 
 var arr = ["a", "b", "c"];
 arr = arr.reduce((a, b) => ((["cazzo"][b] = b), a), {});

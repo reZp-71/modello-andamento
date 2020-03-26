@@ -130,30 +130,29 @@ class AndamentoTempo {
     return d3
       .line()
       .x(d => {
-        console.log("scalaX", this.xScale(data.giorni)(d.giorno));
         return this.xScale(data.giorni)(d.giorno);
       })
       .y(d => {
-        console.log("scalaY", this.yScale(data)(d.valore));
         return this.yScale(data)(d.valore);
       });
-    //.curve(d3.curveMonotoneX);
   }
 
   updateCerchi(data) {
-    const cerchi = this.svg.select("#cerchi");
-    
-    console.log("data-cerchi",data);
 
-    const cerchiGroup = cerchi.selectAll(".circle-group")
+    const cerchiGroup = this.svg.select("#cerchi").selectAll(".circle-group")
       .data(data.valori)
       .attr("class", "circle-group");
+
+    cerchiGroup
+      .exit()
+      .remove();
 
     cerchiGroup.enter()
       .append("g")
       .attr("class", "circle-group")
       .attr("data-chiave", (d,i) => i)
       .attr("fill", (d, i) => this.defaults.colors[i])
+      .merge(cerchiGroup)
       .selectAll("circle")
       .data(d => d)
       .enter()
@@ -167,16 +166,8 @@ class AndamentoTempo {
       .attr("r", this.defaults.circleRadius)
       .transition()
       .duration(this.defaults.duration / 4)
-      .delay((d,i) => i * 150)
+      .delay(this.defaults.duration / 4)
       .style('opacity',1);
-
-    cerchiGroup
-    .exit()
-    .style('opacity',0)
-    .transition()
-    .duration(this.defaults.duration / 4)
-    .delay((d,i) => i * 150)
-    .remove();
 
     d3.selectAll(".circle")
       .on("mouseover", (d, i, nodes) => {
@@ -256,13 +247,6 @@ class AndamentoTempo {
       .attr("d", this.faiSpezzata(data))
       .style("stroke", (d, i) => this.defaults.colors[i])
       .attr("stroke-dashoffset", 0);
-
-    //   // transition from previous paths to new paths
-    //   lines.transition().duration(1500)
-    //     .attr("d",line)
-    //     .attr("stroke", () =>
-    //       '#' + Math.floor(Math.random() * 16777215).toString(16)
-    //     );
   }
 
   render(data) {
@@ -275,7 +259,6 @@ class AndamentoTempo {
       });
     });
 
-    // this.updateYAxis(data);
     if (
       d3
         .select(".x.axis")
@@ -284,10 +267,8 @@ class AndamentoTempo {
     ) {
       this.updateXAxis(nuoviDati.giorni);
     }
-
-    this.updateGrafico(nuoviDati);
     this.updateCerchi(nuoviDati);
-    // this.updateAndamento(data);
+    this.updateGrafico(nuoviDati);
   }
 
   render_old(data) {
